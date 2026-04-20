@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import aboutMission from "@/assets/services/about-mission.jpg";
 import aboutTeam from "@/assets/services/about-team.jpg";
 import { CheckCircle2 } from "lucide-react";
-import { DoctorSection } from "@/components/DoctorSection";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -51,8 +50,6 @@ export default function AboutPage() {
           <img src={aboutTeam} alt="Our team" className="order-1 rounded-3xl shadow-[var(--shadow-elegant)] lg:order-2" />
         </div>
       </section>
-
-      <DoctorSection variant="about" />
     </>
   );
 }
