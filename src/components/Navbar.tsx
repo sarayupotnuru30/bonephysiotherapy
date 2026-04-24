@@ -5,6 +5,7 @@
 // import { cn } from "@/lib/utils";
 // import logo from "@/assets/logo.png";
 
+// // Updated order in the array for mobile mapping
 // const navLinks = [
 //   { to: "/", label: "Home" },
 //   { to: "/about", label: "About" },
@@ -19,7 +20,7 @@
 //     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-lg">
 //       <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
-//         {/* Logo and Tagline - Scaled to match width */}
+//         {/* Logo and Tagline */}
 //         <Link to="/" className="flex flex-col items-center group py-2" aria-label="Bone Physiotherapy Clinic">
 //           <img
 //             src={logo}
@@ -31,8 +32,9 @@
 //           </span>
 //         </Link>
 
-//         {/* Desktop nav */}
+//         {/* Desktop nav - Reordered */}
 //         <nav className="hidden items-center gap-1 lg:flex">
+//           {/* 1. Home */}
 //           <NavLink
 //             to="/"
 //             end
@@ -43,7 +45,17 @@
 //             Home
 //           </NavLink>
 
-//           {/* Services dropdown */}
+//           {/* 2. About */}
+//           <NavLink
+//             to="/about"
+//             className={({ isActive }) =>
+//               `rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-primary ${isActive ? "text-primary" : "text-foreground/80"}`
+//             }
+//           >
+//             About
+//           </NavLink>
+
+//           {/* 3. Services dropdown */}
 //           <div
 //             className="relative"
 //             onMouseEnter={() => setServicesOpen(true)}
@@ -87,14 +99,7 @@
 //             </div>
 //           </div>
 
-//           <NavLink
-//             to="/about"
-//             className={({ isActive }) =>
-//               `rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-primary ${isActive ? "text-primary" : "text-foreground/80"}`
-//             }
-//           >
-//             About
-//           </NavLink>
+//           {/* 4. Contact */}
 //           <NavLink
 //             to="/contact"
 //             className={({ isActive }) =>
@@ -104,6 +109,7 @@
 //             Contact
 //           </NavLink>
 
+//           {/* 5. Book Appointment */}
 //           <Link
 //             to="/contact"
 //             className="ml-3 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:shadow-[var(--shadow-elegant)] hover:-translate-y-0.5"
@@ -121,11 +127,12 @@
 //         </button>
 //       </div>
 
-//       {/* Mobile menu */}
+//       {/* Mobile menu - Reordered */}
 //       {open && (
 //         <div className="lg:hidden border-t border-border bg-background">
 //           <div className="space-y-1 px-4 py-4">
-//             {navLinks.slice(0, 1).map((l) => (
+//             {/* Home and About */}
+//             {navLinks.slice(0, 2).map((l) => (
 //               <Link
 //                 key={l.to}
 //                 to={l.to}
@@ -136,6 +143,7 @@
 //               </Link>
 //             ))}
 
+//             {/* Services Dropdown */}
 //             <details className="group">
 //               <summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-muted">
 //                 Services
@@ -171,7 +179,8 @@
 //               </div>
 //             </details>
 
-//             {navLinks.slice(1).map((l) => (
+//             {/* Contact */}
+//             {navLinks.slice(2).map((l) => (
 //               <Link
 //                 key={l.to}
 //                 to={l.to}
@@ -182,6 +191,7 @@
 //               </Link>
 //             ))}
 
+//             {/* Book Appointment */}
 //             <Link
 //               to="/contact"
 //               onClick={() => setOpen(false)}
@@ -203,14 +213,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { services, categories } from "@/data/services";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-// Updated order in the array for mobile mapping
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
@@ -220,6 +238,9 @@ const navLinks = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+
+  const whatsappNumber = "+919390370782";
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-lg">
@@ -237,9 +258,8 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav - Reordered */}
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-1 lg:flex">
-          {/* 1. Home */}
           <NavLink
             to="/"
             end
@@ -250,7 +270,6 @@ export function Navbar() {
             Home
           </NavLink>
 
-          {/* 2. About */}
           <NavLink
             to="/about"
             className={({ isActive }) =>
@@ -260,7 +279,7 @@ export function Navbar() {
             About
           </NavLink>
 
-          {/* 3. Services dropdown */}
+          {/* Services dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -304,7 +323,6 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* 4. Contact */}
           <NavLink
             to="/contact"
             className={({ isActive }) =>
@@ -314,10 +332,20 @@ export function Navbar() {
             Contact
           </NavLink>
 
-          {/* 5. Book Appointment */}
+          {/* WhatsApp Button */}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#20ba5a] hover:-translate-y-0.5 active:scale-95"
+          >
+            <MessageCircle className="h-4 w-4 fill-current" />
+            WhatsApp
+          </a>
+
           <Link
             to="/contact"
-            className="ml-3 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:shadow-[var(--shadow-elegant)] hover:-translate-y-0.5"
+            className="ml-2 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:shadow-[var(--shadow-elegant)] hover:-translate-y-0.5"
           >
             Book Appointment
           </Link>
@@ -332,11 +360,10 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu - Reordered */}
+      {/* Mobile menu */}
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <div className="space-y-1 px-4 py-4">
-            {/* Home and About */}
             {navLinks.slice(0, 2).map((l) => (
               <Link
                 key={l.to}
@@ -348,7 +375,6 @@ export function Navbar() {
               </Link>
             ))}
 
-            {/* Services Dropdown */}
             <details className="group">
               <summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-muted">
                 Services
@@ -384,7 +410,6 @@ export function Navbar() {
               </div>
             </details>
 
-            {/* Contact */}
             {navLinks.slice(2).map((l) => (
               <Link
                 key={l.to}
@@ -396,7 +421,17 @@ export function Navbar() {
               </Link>
             ))}
 
-            {/* Book Appointment */}
+            {/* Mobile WhatsApp Button */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-sm"
+            >
+              <MessageCircle className="h-4 w-4 fill-current" />
+              Chat on WhatsApp
+            </a>
+
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
